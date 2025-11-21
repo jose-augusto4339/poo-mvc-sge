@@ -5,28 +5,28 @@ Este projeto tem como objetivo o execicio da construção de projetos utlizando 
 Seguindo os princípios da arquitetura MVC as classes responsáveis pelas entidades estão contidas no pacote model.entity.
 
 src
-    ├── main
-    │   ├── java
-    │   │   └── br
-    │   │       └── com
-    │   │           └── sge
-    │   │               ├── Main.java
-    │   │               └── model
-    │   │                   ├── dao
-    │   │                   ├── entity
-    │   │                   │   ├── Administrador.java
-    │   │                   │   ├── Aluno.java
-    │   │                   │   ├── Avaliacao.java
-    │   │                   │   ├── CursoEAD.java
-    │   │                   │   ├── Curso.java
-    │   │                   │   ├── CursoPresencial.java
-    │   │                   │   ├── IAutenticacao.java
-    │   │                   │   ├── IRelatorio.java
-    │   │                   │   ├── Professor.java
-    │   │                   │   ├── Turma.java
-    │   │                   │   └── User.java
-    │   │                   └── service
-    │   └── resources
-    │       └── hibernate.properties
-    └── test
-        └── java
+├── main
+│   ├── java
+│   │   └── br
+│   │       └── com
+│   │           └── sge
+│   │               ├── Main.java
+│   │               └── model
+│   │                   ├── dao
+│   │                   ├── entity
+│   │                   │   ├── Administrador.java
+│   │                   │   ├── Aluno.java
+│   │                   │   ├── Avaliacao.java
+│   │                   │   ├── CursoEAD.java
+│   │                   │   ├── Curso.java
+│   │                   │   ├── CursoPresencial.java
+│   │                   │   ├── IAutenticacao.java
+│   │                   │   ├── IRelatorio.java
+│   │                   │   ├── Professor.java
+│   │                   │   ├── Turma.java
+│   │                   │   └── User.java
+│   │                   └── service
+│   └── resources
+│       └── hibernate.properties
+└── test
+    └── java
