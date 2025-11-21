@@ -1,6 +1,7 @@
 package br.com.sge.model.entity;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,21 +15,31 @@ public class Curso implements IRelatorio{
     @SequenceGenerator(name="curso_seq_gen", sequenceName = "seq_curso")
     private Long id;
 
+    @Column(name="nome")
     private String nome;
 
+    @Column(name="codigo")
     private String codigo;
 
+    @Column(name="carga_horaria")
     private int cargaHoraria;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<Aluno> alunos;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<Curso> curso;
 
     public Curso() {
     }
 
-    public Curso(String nome, String codigo, int cargaHoraria) {
+    public Curso(Long id, String nome, String codigo, int cargaHoraria, List<Aluno> alunos) {
+        this.id = id;
         this.nome = nome;
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
+        this.alunos = alunos;
     }
-
 
     @Override
     public void gerarRelatorio() {
@@ -68,6 +79,30 @@ public class Curso implements IRelatorio{
 
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public List<Curso> getCurso() {
+        return curso;
+    }
+
+    public void setCurso(List<Curso> curso) {
+        this.curso = curso;
     }
 
     @Override

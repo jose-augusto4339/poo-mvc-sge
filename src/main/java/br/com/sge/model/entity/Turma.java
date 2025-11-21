@@ -1,7 +1,6 @@
 package br.com.sge.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +10,47 @@ import java.util.Objects;
 @Table(name="turma")
 public class Turma {
 
+    @Id
+    @Column(name="turma_id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "turma_seq_gen")
+    @SequenceGenerator(name="turma_seq_gen", sequenceName = "seq_turma")
+    private Long id;
+
+    @Column(name="codigo")
     private String codigo;
 
-    private Professor professor;
+    @ManyToMany(mappedBy = "turmas")
+    private List<Professor> professores;
 
-    private Curso curso;
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "turma_aluno", joinColumns = {@JoinColumn(name = "turma_id")}, inverseJoinColumns = {@JoinColumn(name = "aluno_id")})
     private List<Aluno> listaAlunos = new ArrayList<Aluno>();
 
     public Turma() {
     }
 
-    public Turma(String codigo, Professor professor, List<Aluno> listaAlunos) {
+    public Turma(Long id, String codigo, List<Professor> professores, List<Aluno> listaAlunos) {
+        this.id = id;
         this.codigo = codigo;
-        this.professor = professor;
+        this.professores = professores;
         this.listaAlunos = listaAlunos;
     }
 
     public void geraResumoTurma(){
-        System.out.println(
-                "Professor: " + this.getProfessor().getNome() + "\n" +
-                "Curso: " + this.getCurso().getNome() + "\n" +
-                "Alunos matriculados: " + this.getListaAlunos().size()
-        );
+
+        System.out.println("============================================");
+        System.out.println("Professores: ");
+        for(Professor prof : this.getProfessores()){
+            System.out.println("Nome: " + prof.getNome());
+            System.out.println("Registro: " + prof.getRegistro());
+        }
+
+        System.out.println("============================================");
+        System.out.println("Alunos: ");
+        for(Aluno aluno : this.getListaAlunos()){
+            System.out.println("Nome: " + aluno.getNome());
+        }
+
     }
 
     public String getCodigo() {
@@ -44,20 +61,20 @@ public class Turma {
         this.codigo = codigo;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public Long getId() {
+        return id;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public List<Professor> getProfessores() {
+        return professores;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setProfessores(List<Professor> professores) {
+        this.professores = professores;
     }
 
     public List<Aluno> getListaAlunos() {

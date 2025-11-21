@@ -1,7 +1,6 @@
 package br.com.sge.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -9,12 +8,24 @@ import java.util.Objects;
 @Table(name="avaliacao")
 public class Avaliacao {
 
+    @Id
+    @Column(name="nota_id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "nota_seq_gen")
+    @SequenceGenerator(name="nota_seq_gen", sequenceName = "seq_nota")
+    private Long id;
+
+    @Column(name="nota")
     private int nota;
 
+    @Column(name="nota")
     private String descricao;
 
+    @Column(name="aluno_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Aluno aluno;
 
+    @Column(name="turma_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Turma turma;
 
     public Avaliacao() {

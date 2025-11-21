@@ -2,6 +2,7 @@ package br.com.sge.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,16 +18,17 @@ public class Aluno extends User implements IAutenticacao, IRelatorio{
     @Column(name = "matricula")
     private String matricula;
 
-    @OneToMany
-    private Curso curso;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "aluno_curso", joinColumns = {@JoinColumn(name = "aluno_id")}, inverseJoinColumns = {@JoinColumn(name = "curso_id")})
+    private List<Curso> cursos;
 
     public Aluno() {
     }
 
-    public Aluno(String nome, String matricula, Curso curso) {
-        this.nome = nome;
+    public Aluno(Long id, String matricula, List<Curso> cursos) {
+        this.id = id;
         this.matricula = matricula;
-        this.curso = curso;
+        this.cursos = cursos;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class Aluno extends User implements IAutenticacao, IRelatorio{
         System.out.println(
                 "Nome do aluno: " + this.getNome() + "\n" +
                 "Matricula: " + this.getMatricula() + "\n" +
-                "Curso: " + this.getCurso()
+                "Curso: " + this.getCursos()
         );
     }
 
@@ -42,13 +44,20 @@ public class Aluno extends User implements IAutenticacao, IRelatorio{
     public void autenticar(String login, String senha) {
 
     }
-
-    public Curso getCurso() {
-        return curso;
+    public Long getId() {
+        return id;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 
     public String getMatricula() {

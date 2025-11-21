@@ -1,17 +1,29 @@
 package br.com.sge.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name="professor")
 public class Professor extends User implements IAutenticacao, IRelatorio{
 
+    @Id
+    @Column(name="professor_id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "professor_seq_gen")
+    @SequenceGenerator(name="professor_seq_gen", sequenceName = "seq_professor")
+    private Long id;
+
+    @Column(name="especialidade")
     private String especialidade;
 
+    @Column(name="registro")
     private String registro;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "professor_turma", joinColumns = {@JoinColumn(name = "professor_id")}, inverseJoinColumns = {@JoinColumn(name = "turma_id")})
+    private List<Turma> turmas;
 
     public Professor() {
     }
@@ -58,6 +70,22 @@ public class Professor extends User implements IAutenticacao, IRelatorio{
 
     public void setRegistro(String registro) {
         this.registro = registro;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 
     @Override
