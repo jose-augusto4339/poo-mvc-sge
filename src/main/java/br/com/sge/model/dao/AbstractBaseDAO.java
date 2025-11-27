@@ -1,6 +1,6 @@
 package br.com.sge.model.dao;
 
-import br.com.sge.configuration.hibernate.HibernateConnection;
+import br.com.sge.configuration.hibernate.HibernateConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -72,6 +72,6 @@ public abstract class AbstractBaseDAO<T> {
     }
 
     protected Session getSession() {
-        return HibernateConnection.getSession();
+        return HibernateConfiguration.getSession();
     }
 }

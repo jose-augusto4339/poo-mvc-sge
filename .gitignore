@@ -19,6 +19,9 @@
 *.tar.gz
 *.rar
 
+#properties
+*.properties
+
 #idea files
 *.idea
 

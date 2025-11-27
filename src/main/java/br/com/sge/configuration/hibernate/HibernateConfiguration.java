@@ -1,17 +1,13 @@
 package br.com.sge.configuration.hibernate;
 
-import jakarta.persistence.Entity;
+import br.com.sge.model.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.reflections.Reflections;
 
-
-import java.util.Set;
-
-public class HibernateConnection {
+public class HibernateConfiguration {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
@@ -22,14 +18,14 @@ public class HibernateConnection {
                     .build();
 
             MetadataSources sources = new MetadataSources(registry);
-
-            Reflections reflections = new Reflections("br.com.sge");
-            Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
-
-            for (Class<?> entityClass : entities) {
-                System.out.println("Registrando entidade: " + entityClass.getName());
-                sources.addAnnotatedClass(entityClass);
-            }
+            sources.addAnnotatedClass(Administrador.class);
+            sources.addAnnotatedClass(Aluno.class);
+            sources.addAnnotatedClass(Avaliacao.class);
+            sources.addAnnotatedClass(Curso.class);
+            sources.addAnnotatedClass(CursoEAD.class);
+            sources.addAnnotatedClass(CursoPresencial.class);
+            sources.addAnnotatedClass(Professor.class);
+            sources.addAnnotatedClass(Turma.class);
 
             return sources.buildMetadata().buildSessionFactory();
 
