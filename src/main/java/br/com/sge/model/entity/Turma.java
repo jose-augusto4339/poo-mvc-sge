@@ -12,7 +12,7 @@ public class Turma {
 
     @Id
     @Column(name="turma_id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "turma_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "turma_seq_gen")
     @SequenceGenerator(name="turma_seq_gen", sequenceName = "seq_turma")
     private Long id;
 

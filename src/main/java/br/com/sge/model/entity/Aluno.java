@@ -11,7 +11,7 @@ public class Aluno extends User implements IAutenticacao, IRelatorio{
 
     @Id
     @Column(name="aluno_id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "aluno_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "aluno_seq_gen")
     @SequenceGenerator(name="aluno_seq_gen", sequenceName = "seq_aluno")
     private Long id;
 
@@ -22,10 +22,8 @@ public class Aluno extends User implements IAutenticacao, IRelatorio{
     @JoinTable(name = "aluno_curso", joinColumns = {@JoinColumn(name = "aluno_id")}, inverseJoinColumns = {@JoinColumn(name = "curso_id")})
     private List<Curso> cursos;
 
-    public Aluno() {
-    }
-
-    public Aluno(Long id, String matricula, List<Curso> cursos) {
+    public Aluno(String nome, Long id, String matricula, List<Curso> cursos) {
+        super(nome);
         this.id = id;
         this.matricula = matricula;
         this.cursos = cursos;

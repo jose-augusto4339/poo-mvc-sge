@@ -10,22 +10,22 @@ public class Avaliacao {
 
     @Id
     @Column(name="nota_id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "nota_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_seq_gen")
     @SequenceGenerator(name="nota_seq_gen", sequenceName = "seq_nota")
     private Long id;
 
     @Column(name="nota")
     private int nota;
 
-    @Column(name="nota")
+    @Column(name="descricao")
     private String descricao;
 
-    @Column(name="aluno_id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "aluno_id")
     private Aluno aluno;
 
-    @Column(name="turma_id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
     private Turma turma;
 
     public Avaliacao() {

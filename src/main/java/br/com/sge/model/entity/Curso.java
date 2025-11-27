@@ -11,7 +11,7 @@ public class Curso implements IRelatorio{
 
     @Id
     @Column(name="curso_id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "curso_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curso_seq_gen")
     @SequenceGenerator(name="curso_seq_gen", sequenceName = "seq_curso")
     private Long id;
 
@@ -27,8 +27,6 @@ public class Curso implements IRelatorio{
     @ManyToMany(mappedBy = "cursos")
     private List<Aluno> alunos;
 
-    @ManyToMany(mappedBy = "cursos")
-    private List<Curso> curso;
 
     public Curso() {
     }
@@ -97,13 +95,6 @@ public class Curso implements IRelatorio{
         this.alunos = alunos;
     }
 
-    public List<Curso> getCurso() {
-        return curso;
-    }
-
-    public void setCurso(List<Curso> curso) {
-        this.curso = curso;
-    }
 
     @Override
     public boolean equals(Object o) {

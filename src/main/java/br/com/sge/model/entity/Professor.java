@@ -11,7 +11,7 @@ public class Professor extends User implements IAutenticacao, IRelatorio{
 
     @Id
     @Column(name="professor_id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "professor_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "professor_seq_gen")
     @SequenceGenerator(name="professor_seq_gen", sequenceName = "seq_professor")
     private Long id;
 
